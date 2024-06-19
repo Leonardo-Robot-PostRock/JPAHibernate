@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.ManyToAny;
+
 @Entity
 @Table(name = "detalle_factura")
 public class DetalleFactura implements Serializable {
@@ -21,6 +23,10 @@ public class DetalleFactura implements Serializable {
 	private int subtotal;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fk_factura")
+	private Factura factura;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fk_articulo")
 	private Articulo articulo;
 
@@ -31,6 +37,13 @@ public class DetalleFactura implements Serializable {
 	public DetalleFactura(int cantidad, int subtotal) {
 		this.cantidad = cantidad;
 		this.subtotal = subtotal;
+	}
+
+	public DetalleFactura(int cantidad, int subtotal, Factura factura, Articulo articulo) {
+		this.cantidad = cantidad;
+		this.subtotal = subtotal;
+		this.factura = factura;
+		this.articulo = articulo;
 	}
 
 	public int getCantidad() {
@@ -52,5 +65,15 @@ public class DetalleFactura implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+	public Articulo getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(Articulo articulo) {
+		this.articulo = articulo;
+	}
+	
+	
 
 }

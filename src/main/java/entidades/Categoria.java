@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -16,6 +18,9 @@ public class Categoria implements Serializable {
 
 	@Column(name = "denominacion")
 	private String denominacion;
+	
+	@ManyToMany(mappedBy = "categorias")
+	private List<Articulo> articulos = new ArrayList<>();
 
 	public Categoria() {
 
@@ -35,6 +40,14 @@ public class Categoria implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<Articulo> getArticulos() {
+		return articulos;
+	}
+
+	public void setArticulos(List<Articulo> articulos) {
+		this.articulos = articulos;
 	}
 
 }

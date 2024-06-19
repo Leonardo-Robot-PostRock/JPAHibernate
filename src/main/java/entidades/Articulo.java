@@ -1,6 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -24,8 +25,12 @@ public class Articulo implements Serializable {
 	@Column(name = "precio")
 	private int precio;
 
-	@OneToMany(mappedBy = "articulo")
-	private List<DetalleFactura> detalleFactura;
+	@OneToMany(mappedBy = "articulo", cascade = CascadeType.PERSIST)
+	private List<DetalleFactura> detalles = new ArrayList<>();
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "articulo_categoria", joinColumns = @JoinColumn(name = "articulo_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	private List<Categoria> categorias = new ArrayList<>();
 
 	public Articulo() {
 
@@ -63,6 +68,22 @@ public class Articulo implements Serializable {
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public List<DetalleFactura> getDetalleFactura() {
+		return detalles;
+	}
+
+	public void setDetalleFactura(List<DetalleFactura> detalles) {
+		this.detalles = detalles;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 }

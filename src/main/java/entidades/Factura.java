@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -27,6 +29,13 @@ public class Factura implements Serializable {
 	@JoinColumn(name = "fk_cliente")
 	private Cliente cliente;
 
+	// Mapeo unidireccional
+//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<DetalleFactura> detalles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<DetalleFactura> detalles = new ArrayList<>();
+
 	public Factura(String fecha, int numero, int total) {
 		this.fecha = fecha;
 		this.numero = numero;
@@ -34,7 +43,6 @@ public class Factura implements Serializable {
 	}
 
 	public Factura(String fecha, int numero, int total, Cliente cliente) {
-		super();
 		this.fecha = fecha;
 		this.numero = numero;
 		this.total = total;
@@ -75,6 +83,14 @@ public class Factura implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public List<DetalleFactura> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<DetalleFactura> detalles) {
+		this.detalles = detalles;
 	}
 
 }
