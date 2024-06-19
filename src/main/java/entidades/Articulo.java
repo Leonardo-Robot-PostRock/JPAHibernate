@@ -70,11 +70,11 @@ public class Articulo implements Serializable {
 		this.precio = precio;
 	}
 
-	public List<DetalleFactura> getDetalleFactura() {
+	public List<DetalleFactura> getDetalles() {
 		return detalles;
 	}
 
-	public void setDetalleFactura(List<DetalleFactura> detalles) {
+	public void setDetalles(List<DetalleFactura> detalles) {
 		this.detalles = detalles;
 	}
 

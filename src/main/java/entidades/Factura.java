@@ -35,6 +35,10 @@ public class Factura implements Serializable {
 
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<DetalleFactura> detalles = new ArrayList<>();
+	
+	public Factura() {
+		
+	}
 
 	public Factura(String fecha, int numero, int total) {
 		this.fecha = fecha;
