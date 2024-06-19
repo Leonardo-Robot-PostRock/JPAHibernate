@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -27,6 +29,9 @@ public class Cliente implements Serializable {
 	@JoinColumn(name = "fk_domicilio")
 	private Domicilio domicilio;
 
+	@OneToMany(mappedBy = "cliente")
+	private List<Factura> factura = new ArrayList<>();
+
 	public Cliente() {
 
 	}
@@ -36,7 +41,7 @@ public class Cliente implements Serializable {
 		this.apellido = apellido;
 		this.dni = dni;
 	}
-	
+
 	public Cliente(String nombre, String apellido, int dni, Domicilio domicilio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -78,6 +83,14 @@ public class Cliente implements Serializable {
 
 	public void setDomicilio(Domicilio domicilio) {
 		this.domicilio = domicilio;
+	}
+
+	public List<Factura> getFactura() {
+		return factura;
+	}
+
+	public void setFactura(List<Factura> factura) {
+		this.factura = factura;
 	}
 	
 	

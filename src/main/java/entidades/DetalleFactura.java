@@ -20,6 +20,10 @@ public class DetalleFactura implements Serializable {
 	@Column(name = "subtotal")
 	private int subtotal;
 
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fk_articulo")
+	private Articulo articulo;
+
 	public DetalleFactura() {
 
 	}

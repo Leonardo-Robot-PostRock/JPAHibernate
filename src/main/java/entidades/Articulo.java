@@ -1,6 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -22,6 +23,9 @@ public class Articulo implements Serializable {
 
 	@Column(name = "precio")
 	private int precio;
+
+	@OneToMany(mappedBy = "articulo")
+	private List<DetalleFactura> detalleFactura;
 
 	public Articulo() {
 

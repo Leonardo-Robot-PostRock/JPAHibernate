@@ -14,17 +14,6 @@ public class PersistenceApp {
 		try {
 			em.getTransaction().begin();
 
-//			Cliente cliente = new Cliente("Leonardo", "Puebla", 31241991);
-//			Domicilio domicilio = new Domicilio("not found", 5506);
-//			cliente.setDomicilio(domicilio);
-//			domicilio.setCliente(cliente);
-//
-//			em.persist(cliente);
-			Domicilio dom = em.find(Domicilio.class, 1L);
-			Cliente cliente = em.find(Cliente.class, 1L);
-
-			System.out.println("Cliente de domicilio: " + dom.getCliente().getDni());
-			System.out.println("Domicilio cliente: " + cliente.getDomicilio().getNombreCalle());
 			em.flush();
 
 			em.getTransaction().commit();
